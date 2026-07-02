@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>MacroMom — Design System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    /* Colors */
+    --color-primary: #E85440;
+    --color-on-primary: #FFFFFF;
+    --color-primary-hover: #CE4634;
+    --color-primary-bright: #FF6F5E;
+    --color-accent: #F2A65A;
+    --color-on-accent: #2E2A26;
+    --color-accent-hover: #E5924A;
+    --color-surface: #FFF9F3;
+    --color-surface-raised: #FFFFFF;
+    --color-surface-sunken: #F7EEE4;
+    --color-on-surface: #2E2A26;
+    --color-on-surface-muted: #726A61;
+    --color-border: #EADFD2;
+    --color-success: #3E9E6E;
+    --color-on-success: #FFFFFF;
+    --color-warning: #E8A317;
+    --color-on-warning: #2E2A26;
+    --color-error: #B3261E;
+    --color-on-error: #FFFFFF;
+    --color-info: #3E86C4;
+    --color-on-info: #FFFFFF;
+
+    /* Typography */
+    --font-display: "Nunito", system-ui, sans-serif;
+    --font-heading: "Nunito", system-ui, sans-serif;
+    --font-body: "Inter", system-ui, sans-serif;
+
+    /* Rounded */
+    --rounded-sm: 8px;
+    --rounded-md: 14px;
+    --rounded-lg: 20px;
+    --rounded-xl: 28px;
+    --rounded-full: 999px;
+
+    /* Spacing */
+    --space-xs: 4px;
+    --space-sm: 8px;
+    --space-md: 16px;
+    --space-lg: 24px;
+    --space-xl: 32px;
+    --space-2xl: 48px;
+
+    /* Elevation */
+    --elev-card: 0 2px 10px rgba(46,42,38,0.06);
+    --elev-raised: 0 8px 24px rgba(46,42,38,0.10);
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--color-surface);
+    color: var(--color-on-surface);
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 960px; margin: 0 auto; padding: var(--space-2xl) var(--space-lg); }
+  header.page { margin-bottom: var(--space-2xl); }
+  header.page h1 {
+    font-family: var(--font-display); font-weight: 800; font-size: 44px;
+    letter-spacing: -0.02em; margin: 0 0 var(--space-sm); color: var(--color-primary);
+  }
+  header.page p { color: var(--color-on-surface-muted); margin: 0; max-width: 60ch; }
+  .note { font-size: 13px; color: var(--color-on-surface-muted); font-style: italic; margin-top: var(--space-sm); }
+
+  section { margin-bottom: var(--space-2xl); }
+  h2.section {
+    font-family: var(--font-heading); font-weight: 800; font-size: 24px;
+    border-bottom: 2px solid var(--color-border); padding-bottom: var(--space-sm);
+    margin: 0 0 var(--space-lg);
+  }
+  .label { font-family: var(--font-body); font-size: 12px; color: var(--color-on-surface-muted); }
+  .mono { font-variant-numeric: tabular-nums; font-feature-settings: "tnum"; }
+
+  /* Color swatches */
+  .swatch-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px,1fr)); gap: var(--space-md); }
+  .swatch { border-radius: var(--rounded-md); overflow: hidden; box-shadow: var(--elev-card); background: var(--color-surface-raised); }
+  .swatch .chip { height: 84px; display: flex; align-items: flex-end; padding: var(--space-sm); }
+  .swatch .meta { padding: var(--space-sm) var(--space-md) var(--space-md); }
+  .swatch .name { font-weight: 600; font-size: 13px; }
+  .swatch .hex { font-size: 12px; color: var(--color-on-surface-muted); }
+
+  /* Type specimens */
+  .specimen { padding: var(--space-md) 0; border-bottom: 1px solid var(--color-border); display: flex; justify-content: space-between; align-items: baseline; gap: var(--space-lg); }
+  .specimen .spec { font-size: 12px; color: var(--color-on-surface-muted); white-space: nowrap; text-align: right; }
+
+  /* Spacing bars */
+  .space-row { display: flex; align-items: center; gap: var(--space-md); margin-bottom: var(--space-sm); }
+  .space-bar { background: var(--color-primary-bright); height: 16px; border-radius: 4px; }
+  .space-row .label { width: 120px; }
+
+  /* Radius samples */
+  .radius-grid { display: flex; gap: var(--space-lg); flex-wrap: wrap; }
+  .radius-box { width: 96px; height: 96px; background: var(--color-accent); display: flex; align-items: center; justify-content: center; color: var(--color-on-accent); font-size: 12px; font-weight: 600; }
+
+  /* Elevation */
+  .elev-grid { display: flex; gap: var(--space-lg); flex-wrap: wrap; }
+  .elev-box { width: 200px; height: 96px; background: var(--color-surface-raised); border-radius: var(--rounded-lg); display: flex; align-items: center; justify-content: center; font-size: 13px; color: var(--color-on-surface-muted); }
+  .elev-inset { box-shadow: none; background: var(--color-surface-sunken); border: 1px solid var(--color-border); }
+
+  /* Components */
+  .comp-block { margin-bottom: var(--space-lg); }
+  .comp-block > .label { display:block; margin-bottom: var(--space-sm); }
+  .row { display: flex; gap: var(--space-md); flex-wrap: wrap; align-items: center; }
+
+  .btn { border: none; font-family: var(--font-body); font-weight: 600; font-size: 15px; height: 52px; padding: 0 28px; border-radius: var(--rounded-full); cursor: pointer; }
+  .btn-primary { background: var(--color-primary); color: var(--color-on-primary); }
+  .btn-primary-hover { background: var(--color-primary-hover); color: var(--color-on-primary); }
+  .btn-primary-disabled { background: var(--color-border); color: var(--color-on-surface-muted); cursor: not-allowed; }
+  .btn-secondary { background: var(--color-surface-sunken); color: var(--color-primary); border: 1px solid rgba(232,84,64,0.35); }
+
+  .input { height: 52px; padding: 0 var(--space-md); border-radius: var(--rounded-md); border: 1px solid var(--color-border); background: var(--color-surface-raised); color: var(--color-on-surface); font-family: var(--font-body); font-size: 17px; width: 260px; }
+  .input::placeholder { color: var(--color-on-surface-muted); }
+
+  .chip-el { display: inline-block; padding: var(--space-sm) var(--space-md); border-radius: var(--rounded-full); font-size: 13px; font-weight: 500; }
+  .chip-default { background: var(--color-surface-sunken); color: var(--color-on-surface); }
+  .chip-sel { background: var(--color-accent); color: var(--color-on-accent); }
+
+  .card-el { background: var(--color-surface-raised); border-radius: var(--rounded-lg); padding: var(--space-lg); box-shadow: var(--elev-card); max-width: 320px; }
+  .rec-card { background: var(--color-surface-raised); border-radius: var(--rounded-xl); padding: var(--space-lg); box-shadow: var(--elev-card); max-width: 360px; }
+  .rec-card h3 { font-family: var(--font-heading); font-weight: 700; font-size: 18px; margin: 0 0 var(--space-sm); }
+  .rec-card ul { margin: 0 0 var(--space-md); padding-left: 18px; color: var(--color-on-surface); }
+  .macro-row { display: flex; gap: var(--space-sm); margin-bottom: var(--space-md); }
+  .badge-macro { background: var(--color-surface-sunken); color: var(--color-on-surface); border-radius: var(--rounded-sm); padding: var(--space-xs) var(--space-sm); font-size: 13px; }
+  .badge-macro b { font-variant-numeric: tabular-nums; font-feature-settings:"tnum"; font-size: 15px; }
+  .why { color: var(--color-on-surface-muted); font-size: 14px; font-style: italic; margin: 0; }
+
+  .seg { display: inline-flex; background: var(--color-surface-sunken); border-radius: var(--rounded-full); padding: var(--space-xs); }
+  .seg button { border: none; background: transparent; font-family: var(--font-body); font-weight: 600; font-size: 14px; color: var(--color-on-surface-muted); padding: 8px 18px; border-radius: var(--rounded-full); cursor: pointer; }
+  .seg button.active { background: var(--color-surface-raised); color: var(--color-primary); box-shadow: var(--elev-card); }
+
+  .list-row-el { background: var(--color-surface-raised); border-radius: var(--rounded-md); padding: var(--space-md); box-shadow: var(--elev-card); max-width: 360px; display: flex; justify-content: space-between; font-size: 17px; }
+
+  /* Do / Don't */
+  .dodont { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-lg); }
+  .dodont ul { list-style: none; padding: 0; margin: 0; }
+  .dodont li { padding: var(--space-sm) 0; border-bottom: 1px solid var(--color-border); font-size: 14px; }
+  .do h3 { color: var(--color-success); }
+  .dont h3 { color: var(--color-error); }
+  .dodont h3 { font-family: var(--font-heading); }
+  @media (max-width: 640px){ .dodont { grid-template-columns: 1fr; } .specimen { flex-direction: column; align-items: flex-start; gap: 4px; } .specimen .spec { text-align: left; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="page">
+    <h1>MacroMom</h1>
+    <p>Warm, encouraging design system for a dining-hall macro-nutrition app that feels like a caring mom in your pocket.</p>
+    <p class="note">This file is the human-readable mirror of <code>docs/design.md</code> — the source of truth. Tokens below are rendered live from the same values.</p>
+  </header>
+
+  <!-- COLORS -->
+  <section>
+    <h2 class="section">Colors</h2>
+    <div class="swatch-grid">
+      <div class="swatch"><div class="chip" style="background:var(--color-primary);color:var(--color-on-primary)">Aa</div><div class="meta"><div class="name">primary</div><div class="hex">#E85440</div></div></div>
+      <div class="swatch"><div class="chip" style="background:var(--color-primary-hover);color:var(--color-on-primary)">Aa</div><div class="meta"><div class="name">primary-hover</div><div class="hex">#CE4634</div></div></div>
+      <div class="swatch"><div class="chip" style="background:var(--color-primary-bright);color:#fff">Aa</div><div class="meta"><div class="name">primary-bright <span style="color:var(--color-error)">(decorative)</span></div><div class="hex">#FF6F5E</div></div></div>
+      <div class="swatch"><div class="chip" style="background:var(--color-accent);color:var(--color-on-accent)">Aa</div><div class="meta"><div class="name">accent</div><div class="hex">#F2A65A</div></div></div>
+      <div class="swatch"><div class="chip" style="background:var(--color-accent-hover);color:var(--color-on-accent)">Aa</div><div class="meta"><div class="name">accent-hover</div><div class="hex">#E5924A</div></div></div>
+      <div class="swatch"><div class="chip" style="background:var(--color-surface);color:var(--color-on-surface);border:1px solid var(--color-border)">Aa</div><div class="meta"><div class="name">surface</div><div class="hex">#FFF9F3</div></div></div>
+      <div class="swatch"><div class="chip" style="background:var(--color-surface-raised);color:var(--color-on-surface);border:1px solid var(--color-border)">Aa</div><div class="meta"><div class="name">surface-raised</div><div class="hex">#FFFFFF</div></div></div>
+      <div class="swatch"><div class="chip" style="background:var(--color-surface-sunken);color:var(--color-on-surface)">Aa</div><div class="meta"><div class="name">surface-sunken</div><div class="hex">#F7EEE4</div></div></div>
+      <div class="swatch"><div class="chip" style="background:var(--color-on-surface);color:#fff">Aa</div><div class="meta"><div class="name">on-surface</div><div class="hex">#2E2A26</div></div></div>
+      <div class="swatch"><div class="chip" style="background:var(--color-on-surface-muted);color:#fff">Aa</div><div class="meta"><div class="name">on-surface-muted</div><div class="hex">#726A61</div></div></div>
+      <div class="swatch"><div class="chip" style="background:var(--color-border);color:var(--color-on-surface)">Aa</div><div class="meta"><div class="name">border</div><div class="hex">#EADFD2</div></div></div>
+      <div class="swatch"><div class="chip" style="background:var(--color-success);color:var(--color-on-success)">Aa</div><div class="meta"><div class="name">success</div><div class="hex">#3E9E6E</div></div></div>
+      <div class="swatch"><div class="chip" style="background:var(--color-warning);color:var(--color-on-warning)">Aa</div><div class="meta"><div class="name">warning</div><div class="hex">#E8A317</div></div></div>
+      <div class="swatch"><div class="chip" style="background:var(--color-error);color:var(--color-on-error)">Aa</div><div class="meta"><div class="name">error</div><div class="hex">#B3261E</div></div></div>
+      <div class="swatch"><div class="chip" style="background:var(--color-info);color:var(--color-on-info)">Aa</div><div class="meta"><div class="name">info</div><div class="hex">#3E86C4</div></div></div>
+    </div>
+  </section>
+
+  <!-- TYPOGRAPHY -->
+  <section>
+    <h2 class="section">Typography</h2>
+    <div class="specimen"><span style="font-family:var(--font-display);font-weight:800;font-size:34px;letter-spacing:-0.02em;line-height:1.15">Eat well today</span><span class="spec">display · Nunito 800 · 34/1.15 · -0.02em</span></div>
+    <div class="specimen"><span style="font-family:var(--font-heading);font-weight:800;font-size:28px;letter-spacing:-0.01em">Morning, Bailey!</span><span class="spec">h1 · Nunito 800 · 28/1.2 · -0.01em</span></div>
+    <div class="specimen"><span style="font-family:var(--font-heading);font-weight:700;font-size:22px">Today at Schilletter</span><span class="spec">h2 · Nunito 700 · 22/1.25</span></div>
+    <div class="specimen"><span style="font-family:var(--font-heading);font-weight:700;font-size:18px">Grilled chicken bowl</span><span class="spec">h3 · Nunito 700 · 18/1.3</span></div>
+    <div class="specimen"><span style="font-family:var(--font-body);font-weight:400;font-size:17px">This plate gets you right to your protein goal.</span><span class="spec">body-lg · Inter 400 · 17/1.5</span></div>
+    <div class="specimen"><span style="font-family:var(--font-body);font-weight:400;font-size:15px">Grilled chicken, roasted veggies, brown rice.</span><span class="spec">body · Inter 400 · 15/1.5</span></div>
+    <div class="specimen"><span style="font-family:var(--font-body);font-weight:600;font-size:15px">I ate this</span><span class="spec">label · Inter 600 · 15/1.2</span></div>
+    <div class="specimen"><span style="font-family:var(--font-body);font-weight:500;font-size:13px;color:var(--color-on-surface-muted)">estimated · 1 breast</span><span class="spec">caption · Inter 500 · 13/1.35</span></div>
+    <div class="specimen"><span class="mono" style="font-family:var(--font-body);font-weight:700;font-size:26px">42g · 38g · 12g</span><span class="spec">numeric · Inter 700 · 26/1.1 · tnum</span></div>
+  </section>
+
+  <!-- SPACING -->
+  <section>
+    <h2 class="section">Spacing</h2>
+    <div class="space-row"><span class="label mono">xs · 4px</span><div class="space-bar" style="width:4px"></div></div>
+    <div class="space-row"><span class="label mono">sm · 8px</span><div class="space-bar" style="width:8px"></div></div>
+    <div class="space-row"><span class="label mono">md · 16px</span><div class="space-bar" style="width:16px"></div></div>
+    <div class="space-row"><span class="label mono">lg · 24px</span><div class="space-bar" style="width:24px"></div></div>
+    <div class="space-row"><span class="label mono">xl · 32px</span><div class="space-bar" style="width:32px"></div></div>
+    <div class="space-row"><span class="label mono">2xl · 48px</span><div class="space-bar" style="width:48px"></div></div>
+  </section>
+
+  <!-- RADIUS -->
+  <section>
+    <h2 class="section">Radius</h2>
+    <div class="radius-grid">
+      <div class="radius-box" style="border-radius:var(--rounded-sm)">sm 8</div>
+      <div class="radius-box" style="border-radius:var(--rounded-md)">md 14</div>
+      <div class="radius-box" style="border-radius:var(--rounded-lg)">lg 20</div>
+      <div class="radius-box" style="border-radius:var(--rounded-xl)">xl 28</div>
+      <div class="radius-box" style="border-radius:var(--rounded-full)">full</div>
+    </div>
+  </section>
+
+  <!-- ELEVATION -->
+  <section>
+    <h2 class="section">Elevation &amp; Depth</h2>
+    <div class="elev-grid">
+      <div class="elev-box" style="box-shadow:var(--elev-card)">card · soft warm shadow</div>
+      <div class="elev-box" style="box-shadow:var(--elev-raised)">raised · modal / hero</div>
+      <div class="elev-box elev-inset">inset · sunken + border</div>
+    </div>
+  </section>
+
+  <!-- COMPONENTS -->
+  <section>
+    <h2 class="section">Components</h2>
+
+    <div class="comp-block">
+      <span class="label">Buttons — primary (default / hover / disabled) &amp; secondary</span>
+      <div class="row">
+        <button class="btn btn-primary">See today's plates</button>
+        <button class="btn btn-primary-hover">See today's plates</button>
+        <button class="btn btn-primary-disabled" disabled>See today's plates</button>
+        <button class="btn btn-secondary">Not today</button>
+      </div>
+    </div>
+
+    <div class="comp-block">
+      <span class="label">Input</span>
+      <div class="row"><input class="input" placeholder="Current weight (lbs)" /></div>
+    </div>
+
+    <div class="comp-block">
+      <span class="label">Chips — default &amp; selected</span>
+      <div class="row">
+        <span class="chip-el chip-default">Maintain</span>
+        <span class="chip-el chip-sel">Build muscle</span>
+        <span class="chip-el chip-default">Lose fat</span>
+        <span class="chip-el chip-default">Eat healthier</span>
+      </div>
+    </div>
+
+    <div class="comp-block">
+      <span class="label">Segmented control</span>
+      <div class="seg">
+        <button>Breakfast</button>
+        <button class="active">Lunch</button>
+        <button>Dinner</button>
+      </div>
+    </div>
+
+    <div class="comp-block">
+      <span class="label">Recommendation card (hero)</span>
+      <div class="rec-card">
+        <h3>Grilled Chicken Power Bowl</h3>
+        <ul><li>Grilled chicken breast</li><li>Roasted veggies</li><li>Brown rice</li></ul>
+        <div class="macro-row">
+          <span class="badge-macro">P <b>42g</b></span>
+          <span class="badge-macro">C <b>38g</b></span>
+          <span class="badge-macro">F <b>12g</b></span>
+          <span class="badge-macro">Cal <b>430</b></span>
+        </div>
+        <p class="why">Grilled over fried gets you right to your protein goal, sweetie.</p>
+      </div>
+    </div>
+
+    <div class="comp-block">
+      <span class="label">Basic card &amp; list row</span>
+      <div class="row" style="align-items:flex-start">
+        <div class="card-el"><strong>So proud of you!</strong><p style="margin:8px 0 0;color:var(--color-on-surface-muted)">Three days hitting your protein goal.</p></div>
+        <div class="list-row-el"><span>Notifications</span><span class="mono" style="color:var(--color-on-surface-muted)">On</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DO / DON'T -->
+  <section>
+    <h2 class="section">Do's and Don'ts</h2>
+    <div class="dodont">
+      <div class="do">
+        <h3>✓ Do</h3>
+        <ul>
+          <li>Lead with warmth and encouragement — like a proud, caring mom.</li>
+          <li>Keep one clear decision per screen; the recommendation is the focal point.</li>
+          <li>Use cream <span class="mono">surface</span> as the background; white for raised cards.</li>
+          <li>Use <span class="mono">numeric</span> tabular figures for all macro numbers.</li>
+          <li>Reserve <span class="mono">primary</span> coral for the single top action per screen.</li>
+          <li>Meet WCAG AA on every text pairing.</li>
+        </ul>
+      </div>
+      <div class="dont">
+        <h3>✗ Don't</h3>
+        <ul>
+          <li>Don't shame or use error styling to punish a missed goal.</li>
+          <li>Don't overwhelm with dense tables or dashboard-style charts.</li>
+          <li>Don't use hard corners, heavy dark shadows, or stark white backgrounds.</li>
+          <li>Don't use <span class="mono">primary-bright</span> for text (decorative only).</li>
+          <li>Don't introduce cool grays or clinical blues as dominant colors.</li>
+          <li>Don't stack multiple coral CTAs competing in one view.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</div>
+</body>
+</html>
