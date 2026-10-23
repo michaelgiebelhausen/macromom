@@ -55,6 +55,13 @@
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": true
-    }
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "a40a86a0-4889-44b4-aff0-25d9d3b7fa87"
+      }
+    },
+    "owner": "bohvents"
   }
 }
